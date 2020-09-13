@@ -1,0 +1,146 @@
+﻿@*стр218
+
+
+    Файл запуска представления,
+    указывает, что в качестве стандартной компоновки должен
+    выступать файл по имени Layout.cshtml, так что начальную
+    стилизацию Bootstrap мы применим именно к нему
+
+
+    asp-href-include="/lib/bootstrap/dist/**/*.min.css"
+    asp-href-include="/lib/twitter-bootstrap/dist/**/*.css"
+          asp-href-include="/lib/bootstrap/dist/**/*.css"
+
+              asp-href-include="/lib/bootstrap-4.5.0-dist/dist/**/*.css"
+          asp-href-include="/lib/bootstrap-4.0.0-alfa/dist/**/*.css"
+
+    bootstrap-4.5.0-dist
+*@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <META NAME="Robots" CONTENT="INDEX,FOLLOW">
+    <META NAME="description" CONTENT="Данный сайт содержит информацию для любителей ... ">
+    <META NAME="keywords" CONTENT="реклама">
+    <meta name="author" content="Заболотный Константин зпи-зп92">
+    @*<link rel="stylesheet"
+        asp-href-include="/lib/bootstrap-4.5.0-dist/dist/**/*.css"
+        asp-href-exclude="**/*-reboot*,**/*-grid*" />*@
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" asp-href-include="/lib/fontawesome-free-5.14.0-web/css/*.css" />
+
+    <title>SportsStore</title>
+    <style>
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            /*            background-color: #f1f1f1;
+        */ min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            /* Links inside the dropdown */
+            .dropdown-content a {
+                display: block;
+            }
+        .show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+
+
+
+
+
+
+    <nav class="navbar navbar-dark navbar-expand-sm navbar-toggleable-sm bg-dark " role="navigation">
+
+            @*<div id="categories" class="col-3">
+                        Put somesing useful here later
+                        Текс заполнителя заменен вызовом метода Component .InvokeAsync().
+                    Аргументом метода является имя класса компонента без части View Component. т.е .
+                    с помощью NavigationMen указывается класс NavigationMenuViewComponent.
+                    Запустив приложение, можно заметить. Что вывод из метода InvokeAsync() включен НТМL­разметку.
+                        @await Component.InvokeAsync("NavigationMenu")
+                    </div>boxboxclass="container"
+                </div>*@
+
+
+            <div>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternal" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <a class="   navbar-brand " asp-area="" asp-page="/Index">Pharmacy store</a>
+
+            </div>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" id="navbarToggleExternal">
+                <ul class="navbar-nav flex-grow-1">
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-page="/Privacy">Privacy</a>
+                    </li>
+
+
+                </ul>
+            </div>
+
+
+            @await Component.InvokeAsync("CartSummary")
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </nav>
+
+
+        <div class="row m-0 p-0">
+            <div id="categories" class="col-3">
+                @*Put somesing useful here later*@
+                @*Текс заполнителя заменен вызовом метода Component .InvokeAsync().
+                    Аргументом метода является имя класса компонента без части View Component. т.е .
+                    с помощью NavigationMen указывается класс NavigationMenuViewComponent.
+                    Запустив приложение, можно заметить. Что вывод из метода InvokeAsync() включен НТМL­разметку.*@
+                @await Component.InvokeAsync("NavigationMenu")
+            </div>
+
+
+            <div class="col-9">
+                @RenderBody()
+            </div>
+            <footer class="footer" style="text-align:center">
+                <p>Заболотный Константин зпи-зп92
+                    <a href="mailto:kastantin.knu@gmail.com?subject=Вопрос по HTML">
+                        Email me
+                    </a>
+                </p>
+            </footer>
+        </div>
+
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+
+        @RenderSection("Scripts", required: false)
+    </body>
+</html>
+

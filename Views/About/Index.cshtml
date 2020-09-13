@@ -1,0 +1,105 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@inject Wangkanai.Detection.Services.IDetectionService DetectionService
+@{
+    Layout = null;
+}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>Flexbox в CSS3</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            padding: 0;
+            margin: 0;
+            font-family: verdana, arial, sans-serif;
+        }
+
+        body {
+            color: #fff;
+            font-size: 1.1em;
+            padding: 1em;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+        }
+
+        article {
+            background-color: #546e7a;
+            flex: 2 2 12em;
+            padding: 1em;
+        }
+
+        nav, aside {
+            flex: 1;
+            background-color: #455a64;
+        }
+
+        nav {
+            order: -1;
+        }
+
+        header, footer {
+            flex: 0 0 5em;
+            background-color: #37474f;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <p>Header</p>
+    </header>
+    <main>
+        <article>
+            <h1>Что такое Lorem Ipsum?</h1>
+            <p>
+                <ul>
+                    <li>@DetectionService.Device.Type</li>
+                    <li>@DetectionService.Browser.Name</li>
+                    <li>@DetectionService.Platform.Name</li>
+                    <li>@DetectionService.Engine.Name</li>
+                    <li>@DetectionService.Crawler.Name</li>
+                </ul>
+
+                @DetectionService.Device.Type
+            </p>
+        </article>
+        <nav>
+            <p>Navigation</p>
+        </nav>
+        <aside>
+            <p>Sidebar</p>
+        </aside>
+    </main>
+    <footer>
+        <p>Footer</p>
+    </footer>
+</body>
+</html>
+@*@media screen and (min-width: 600px) {
+
+    body{
+        min-height: 100vh;
+    }
+    main {
+        flex-direction: row;
+        min-height: 100%;
+        flex: 1 1 auto;
+    }*@

@@ -1,0 +1,18 @@
+﻿
+@inject Wangkanai.Detection.Services.IDetectionService DetectionService
+
+@{
+    @if (DetectionService.Device.Type.ToString() == "Desktop")
+    {
+        Layout = "_Layout";
+
+    }
+    else {
+        Layout = "_Layout";
+
+        //Layout = "_Layout.Mobile";
+    }
+}
+
+
+

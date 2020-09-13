@@ -1,0 +1,94 @@
+﻿@*Каждый заказ отображается с кнопкой Ship(Отгрузить), которая отправляет форму
+    методу действия MarkShipped(). С помощью свойства Layout для представления
+    List указана другая компоновка, которая переопределяет компоновку. Заданную
+    в файле_ViewStart. cshtml.*@
+@*306 Для добавления компоновки создадим в папке Views/Shared файл
+    по имени AdminLayout. cshtml с применением шаблона элемента
+    MVC View Layout Page (Страница компоновки представления МVС)
+        <link rel="stylesheet" asp-href-include="/lib/bootstrap-4.0.0-alfa/dist/css/*.css" />
+        <link rel="stylesheet" asp-href-include="/lib/bootstrap-4.5.0-dist/dist/css/*.css" />
+
+
+*@
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" asp-href-include="/lib/bootstrap-4.5.0-dist/dist/css/*.css" />
+    <title>@ViewBag.Title</title>
+    <style>
+        .input-validation-error {
+            border-color: red;
+            background-color: #fee;
+        }
+    </style>
+
+</head>
+
+<body class="m-1 p-1">
+
+    <div class="bg-info p-2 row">
+        <div class="col">
+            <h4>@ViewBag.Title</h4>
+        </div>
+        <div class="col-2">
+            <a class="btn btn-sm btn-primary"
+               asp-action="Logout" asp-controller="Account">Log Out</a>
+        </div>
+    </div>
+    @if (TempData["message"] != null)
+    {
+        <div class="alert alert-success mt-1">@TempData["message"]</div>
+    }
+    @RenderBody()
+</body>
+</html>
+
+@section Scripts {
+    @*<script src="/lib/jquery/dist/jquery.min.js"></script>
+        <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>*@
+    <partial name="_ValidationScriptsPartial.cshtml" />
+    <localization-validation-scripts></localization-validation-scripts>
+}
+
+@*Включение проверки достоверности на стороне клиента не приводит
+    к каким-то визуальным изменениям. Но ограничения. Которые указаны
+    с помощью атрибутов .примененных к классу модели С#, вступают
+    в силу на уроне браузера, предотращая отправку пользователем
+    формы с недопустимыми данными и обеспечивая немедлен­ный отклик при наличии проблемы.*@
+@*
+    https://docs.microsoft.com/en-us/aspnet/core/fundamentals/localization?view=aspnetcore-3.1
+         You may not be able to enter decimal commas in decimal fields.
+    To support jQuery validation for non-English locales that use a comma
+    (",") for a decimal point, and non US-English date formats, you must
+    take steps to globalize your app.
+
+    https://quares.ru/?id=55285
+         установить пакет nuget:
+
+
+    Install-Package LazZiya.TagHelpers -Version 2.1.0
+
+
+        добавить LazZiya.TagHelpers в _ViewImports:
+
+    @using LazZiya.TagHelpers
+    @addTagHelper *, LazZiya.TagHelpers
+
+        зарегистрируйте вспомогательный компонент тега проверки локализации при запуске:
+
+
+    services.AddTransient<ITagHelperComponent, LocalizationValidationScriptsTagHelperComponent>
+        ();
+
+
+        добавьте тег в раздел скриптов на странице для проверки локализованных полей ввода (должен быть также загружен файл по умолчанию _ValidationScriptsPartial.cshtml):
+
+        <partial name="_ValidationScriptsPartial.cshtml" />
+        <localization-validation-scripts></localization-validation-scripts>
+
+        Этот TagHelper автоматически определит текущее имя культуры и добавит все необходимые сценарии для проверки локализованных значений.*@

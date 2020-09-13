@@ -1,0 +1,70 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@*добавление представления для метода действия Index () контроллера Admin.
+    Создадим папку Views/Admin и добавим в нее файл представления Razor по имени Index.cshtml*@
+@*Представление содержит таблицу, в которой для каждого товара предусмотрена строка с
+    ячейками, содержащими наименование и цену товара. Кроме того .в каждой строке
+    присутствуют кнопки. Которые позволят редактировать сведения о товаре и удалять его ,
+    отправляя запросы к действиям Edit и Delete .В дополнение к таблице имеется кнопка
+    Add Product (Добавить товар). Нацеленная на действие Create. Можно посмотреть, как
+    отображаются товары. Запустив приложение и запросив URL вида /Admin/Index*@
+@*к н о п к а Edit ( Р е д а к т и р о в а т ь ) находится в н у т р и элемента form,
+    т а к ч т о две к н о п к и располагаются рядом благодаря и н т е р в а л у ,
+    примененному Bootstrap. Кнопка Edit будет посылать серверу НТТР-эапрос GET для
+    получения текущих сведений о т о в а р е ; э т о н е т р е б у е т элемента form.
+    Однако п о с к о л ь к у к н о п к а Delete ( У д а л и т ь ) б у д е т в н о с и т ь
+    изменение в состояние приложения, необходимо использовать НТТР-эапрос POST, к о т о рый
+    требует элемента form.*@
+
+@*@System.Globalization.CultureInfo.CurrentUICulture*@
+
+
+@model IEnumerable<Product>
+@{
+    ViewBag.Title = "All Products";
+    Layout = "_AdminLayout";
+}
+@if (Model.Count() == 0)
+{
+    <div class="text-center m-2">
+        <form asp-action="SeedDatabase" method="post">
+            <button type="submit" class="btn btn-danger">Seed Database</button>
+        </form>
+    </div>
+}
+else
+{
+<table class="table table-striped table-bordered table-sm">
+    <tr>
+        <th class="text-right">ID</th>
+        <th>Name</th>
+        <th class="text-right">Price</th>
+        <th class="text-center">Actions</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="text-right">@item.ProductID</td>
+            <td>@item.Name</td>
+            <td class="text-right">@item.Price.ToString("c")</td>
+            <td class="text-center">
+                <form asp-action="Delete" method="post">
+                    <a asp-action="Edit" class="btn btn-sm btn-warning" asp-route-productId="@item.ProductID">
+                        Edit
+                    </a>
+                    <input type="hidden" name="ProductID" value="@item.ProductID" />
+                    <button type="submit" class="btn btn-danger btn-sm">
+                        Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+}
+<div class="text-center">
+    <a asp-action="Create" class="btn btn-primary">Add Product</a>
+</div>

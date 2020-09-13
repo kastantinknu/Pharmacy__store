@@ -1,0 +1,167 @@
+﻿@*стр218
+
+
+    Файл запуска представления,
+    указывает, что в качестве стандартной компоновки должен
+    выступать файл по имени Layout.cshtml, так что начальную
+    стилизацию Bootstrap мы применим именно к нему
+
+
+    asp-href-include="/lib/bootstrap/dist/**/*.min.css"
+    asp-href-include="/lib/twitter-bootstrap/dist/**/*.css"
+          asp-href-include="/lib/bootstrap/dist/**/*.css"
+
+              asp-href-include="/lib/bootstrap-4.5.0-dist/dist/**/*.css"
+          asp-href-include="/lib/bootstrap-4.0.0-alfa/dist/**/*.css"
+
+    bootstrap-4.5.0-dist
+*@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet"
+          asp-href-include="/lib/bootstrap-4.5.0-dist/dist/**/*.css"
+          asp-href-exclude="**/*-reboot*,**/*-grid*" />
+    <link rel="stylesheet" asp-href-include="/lib/fontawesome-free-5.14.0-web/css/*.css" />
+    <title>SportsStore</title>
+    <style>
+                /*.dropbtn {*/
+                /*            background-color: #3498DB;
+                    color: white;
+                    padding: 16px;
+                    font-size: 16px;
+                    border: none;
+                    cursor: pointer;
+        */ /*}*/
+
+                /*             Dropdown button on hover & focus
+        */ /*.dropbtn:hover, .dropbtn:focus {
+                        background-color: #2980B9;
+                    }*/
+
+                /*         The container <div> - needed to position the dropdown content
+        */ /*.dropdown {
+                    position: relative;
+                    display: inline-block;
+                }*/
+
+                /*         Dropdown Content (Hidden by Default)
+        */ .dropdown-content {
+                    display: none;
+                    position: absolute;
+                    /*            background-color: #f1f1f1;
+        */ min-width: 160px;
+                    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                    z-index: 1;
+                }
+
+                    /* Links inside the dropdown */
+                    .dropdown-content a {
+                        /*                color: black;
+        */ /*padding: 12px 16px;
+                        text-decoration: none;*/
+                        display: block;
+                    }
+
+                /* Change color of dropdown links on hover */
+                /*.dropdown-content a:hover {*/
+                /*background-color: #ddd*/
+                /**/ /*}*/
+
+                /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+                .show {
+                    display: block;
+                }
+    </style>
+</head>
+<body>
+    @*<div class="navbar navbar-inverse bg-inverse" role="navigation">
+            <a class="navbar-brand" href="#">SPORTS STORE</a>
+        </div>*@
+
+    @*<div class="navbar navbar-inverse bg-inverse" role="navigation">
+                    <div class="row">
+                        <a class="col navbar-brand" href="#">SPORTS STORE</a>
+                        <div class="col-4 text-right">
+                            @await Component.InvokeAsync("CartSummary")
+                        </div>
+
+                    </div>
+                </div>                <button class="">
+                </button>
+        <div class="text-right">
+        class="dropdown" dropbtnclass="dropbtn"class="dropbtn"
+                    </div>*@
+    <div class="navbar navbar-dark bg-dark " role="navigation">
+        <div>
+            <div>
+                <i onclick="myFunction()" class="btn btn-sm btn-secondary navbar-btn fas fa-align-justify"></i>
+            </div>
+            <div id="myDropdown" class="dropdown-content">
+                @*<a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>*@
+                @await Component.InvokeAsync("NavigationMenu")
+            </div>
+            @*<div id="categories" class="col-3">
+                Put somesing useful here later
+                Текс заполнителя заменен вызовом метода Component .InvokeAsync().
+            Аргументом метода является имя класса компонента без части View Component. т.е .
+            с помощью NavigationMen указывается класс NavigationMenuViewComponent.
+            Запустив приложение, можно заметить. Что вывод из метода InvokeAsync() включен НТМL­разметку.
+                @await Component.InvokeAsync("NavigationMenu")
+            </div>*@
+        </div>
+
+        <div @* style="width:140px"*@>
+            <a class="navbar-brand " href="#">SPORTS STORE</a>
+            <div class="row text-right">
+                @await Component.InvokeAsync("CartSummary")
+
+            </div>
+
+        </div>
+
+
+    </div>
+    @*Put somesing useful here later*@
+    @*Текс заполнителя заменен вызовом метода Component .InvokeAsync().
+        Аргументом метода является имя класса компонента без части View Component. т.е .
+        с помощью NavigationMen указывается класс NavigationMenuViewComponent.
+        Запустив приложение, можно заметить. Что вывод из метода InvokeAsync() включен НТМL­разметку.*@
+    
+<div class="row m-1 p-1">
+    @*<div id="categories" class="col-3">
+        </div>                  @await Component.InvokeAsync("NavigationMenu")
+            </div>*@
+    <div class="col-9">
+        @RenderBody()
+    </div>
+</div>
+    <script>
+        /* When the user clicks on the button,
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.fas')) {
+
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

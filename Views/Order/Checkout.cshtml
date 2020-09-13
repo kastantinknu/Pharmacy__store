@@ -1,0 +1,66 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@*Для каждого свойства в модели мы создали элементы label и input  для
+    пользовательского ввода сформатированные с помощью Bootstrap.
+    Атрибут asp-for в элементах input обрабатывается встроенной
+    вспомогательной функцией дескриптора .которая генерирует
+    атрибуты type, id, name и value на основе указанного свойства модели*@
+@model Order
+<h2>Check out now</h2>
+<p>Please enter your details, and we'll ship yuor goods right away!</p>
+
+@*//использовать атрибуты проверки достоверности.примененные к классу
+    //    O rder.Тем не менее.Чтобы отобразить сообщения о проблемах,
+    //    понадобится внести небольшое изменение.Здесь задействована
+    //    еще одна встроенная вспомогательная функция дескриптора.
+    //    Которая инспектирует состояние проверки достоверности данных.
+    //    Предоставленных пользова­телем. И добавляет предупреждающие
+    //    сообщения для каждой обнаруженной проблемы. Добавим в файлChe cko ut.cs h tm
+    //    элемента HTML, который будет обрабатываться этой вспомогательной функцией дескриптора.*@
+<div asp-validation-summary="All" class="text-danger"></div>
+@*Благодаря такому простому изменению польователю отображаются сообщения
+    об ошибках проверки достоверности. Чтобы увидеть резуль т а т ,
+    понадобится посетить URLвида/Order / Ch eckout и попробовать 
+    перейти к оплате, невыбрав ни одного товара или не указав сведния
+    о доставке. Вспомогательная функция де­скриптора, генерирующая такие сообщения.
+    Является частью системы проверки достоверности моделей,*@
+<form asp-action="Checkout" metod="post">
+    <h3>Ship to</h3>
+    <div class="form-group">
+        <label>Name:</label><input asp-for="Name" class="form-control" />
+        <h3>Address</h3>
+        <div class="form-group">
+            <label>Line 1:</label><input asp-for="Line1" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Line 2:</label><input asp-for="Line2" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Line 3:</label><input asp-for="Line3" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>City:</label><input asp-for="City" class="form-control" />
+        </div>
+        <div>
+            <label>Region:</label><input asp-for="Region" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Zip:</label><input asp-for="Zip" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Country:</label><input asp-for="Country" class="form-control" />
+        </div>
+        <h3>Options</h3>
+        <div class="checkbox">
+            <label>
+                <input asp-for="GiftWrap" /> Gift wrap these items
+            </label>
+        </div>
+        <div class="text-center">
+            <input class="btn btn-primary" type="submit" value="Complete order" />
+        </div>
+    </div>
+</form>

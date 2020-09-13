@@ -1,0 +1,58 @@
+﻿@*страница браузера выводящая список товаров
+    Мы создали модель представления, которая содержит информацию о разбиении на страницы,
+    обновили контроллер, чтобы эта информация передавалась представлению,
+    и модифицировали выражение @model, приведя его в соответствии с новым типом
+    модели представления. Осталось добавить НТМL - элемент, который вспомогательная
+    функция дескриптора будет обрабатывать для создания ссылок на страницы*@
+
+@*@model IEnumerable<Product> - просто список*@
+@model ProductsListViewModel
+@*  класс содержащий список и сведение о странице , Model.Products - свойство объекта класса ProductsListViewModel,
+    содержащее IEnumerable<Product> *@.
+
+@foreach (var p in Model.Products)
+{
+    //Мы взяли код разметки, который ранее размещался в цикле foreach внутри
+    //представления List.cshtml, и перенесли его в новое частичное представление.
+    //Обращение к частичному представлению производится с помощью вспомогательного
+    //метода Html.Partial(), которому в аргументах передаются имя представления  и
+    //объект модели представления. Подобного рода переход на частичное представление
+    //является рекомендуемым приемом, поскольку он позволяет вставлять одну и ту же
+    //разметку в любое представление, которое нуждается в отображении сводки о товаре.
+    //Как видно, добавление частичного представления не изменяет  внешний вид приложения;
+    //оно просто меняет место, где механизм Razor находит содержимое, которое применяет
+    //для генерации ответа, отправляемого браузеру.
+
+    @Html.Partial("ProductSammary", p)
+
+    @*<div class="card card-outline-primary m-1 p-1">
+            <div class="bg-faded p-1">
+                <h4>
+                    @p.Name
+                    <span class="badge badge-pill badge-primary" style="float:right">
+                        <small>@p.Price.ToString("c")</small>
+                    </span>
+                </h4>
+            </div>
+            <div    class="card-text p-1">
+                @p.Description
+            </div>
+        </div>*@
+}
+<div page-model="@Model.PagingInfo" page-action="List"
+     page-classes-enabled="true"
+     page-class="btn" page-class-normal="btn-secondary"
+     page-class-selected="btn-primary" page-url-category="@Model.CurrentCategory"
+     class="btn-group pull-right m-1"></div>
+@*  привязка к категории через "@Model.CurrentCategory"
+    Пользователь щелкает на ссылке текущая категория передается методу действия List() и фильтрация сохраняется
+*@
+
+
+
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
