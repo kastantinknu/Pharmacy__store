@@ -3,17 +3,16 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:61576",
-      "sslPort": 44356
+      "applicationUrl": "http://localhost:61578",
+      "sslPort": 0
     }
   },
   "profiles": {
     "Snapshot Debugger": {
       "commandName": "Snapshot Debugger"
     },
-    "newProfile1": {
+    "newProfile3": {
       "commandName": "IISExpress",
-      "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
